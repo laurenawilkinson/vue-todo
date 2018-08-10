@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <script src="scripts/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="todoItem.todo" @keyup.enter="addTodo" placeholder="What do you want to get done?" autofocus>
+        <button class="btn-round" @click="addTodo">+</button>
+        <select v-model="todoItem.type">
+            <option v-for="type in todoTypes">{{ type }}</option>
+        </select>
+        
+        <div class="lists">
+            <list-group v-for="(type, index) in todoTypes" :type="type" :todo-list="todoList" :key="index">
+                <template slot-scope="group">
+                    <todo-item v-for="(todo, index) in filteredTodos(type)" 
+                                    :todo="todo" 
+                                    :key="index"
+                                    :type="group"
+                                    @remove-todo="removeTodo(index)">
+                    </todo-item>
+                </template>
+            </list-group>
+            <!-- <div class="list">
+                <h2>{{ todoTypes[0] }}</h2>
+                <todo-item v-for="(todo, index) in todoList" 
+                    :todo="todo" 
+                    :key="index"
+                    @remove-todo="removeTodo($event)">
+                </todo-item>
+            </div>
+            <div class="list">
+                <h2>Work</h2>
+                <todo-item v-for="(todo, index) in todoList" 
+                    :todo="todo" 
+                    :key="index"
+                    @remove-todo="removeTodo($event)">
+                </todo-item>
+            </div>
+            <div class="list">
+                <h2>Dailies</h2>
+                <todo-item v-for="(todo, index) in dailiesList"
+                    :todo="todo" 
+                    :key="index"
+                    @remove-todo="removeTodo($event)">
+                </todo-item>
+            </div> -->
+        </div>
+        <!-- <ul>
+            <li v-for="todo in todoList">{{ todo }}</li>
+        </ul> -->
+        <p>Todo is equal to: {{ output }}</p> 
+    </div>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
