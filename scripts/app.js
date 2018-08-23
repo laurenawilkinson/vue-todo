@@ -2,7 +2,7 @@ Vue.component('todo-item', {
     props: ['todo'],
     template:
         `<div class="todo-item">
-            <p>{{ todo.todo }}</p><button @click="$emit('remove-todo')">Remove</button>
+            <p>{{ todo.todo }}</p><button @click="$emit('remove-todo', todo)">Remove</button>
         </div>`
 });
 
@@ -31,8 +31,8 @@ let app = new Vue({
                 this.todoItem = { todo: '', type: this.todoItem.type };
             }
         },
-        removeTodo: function(index){
-            this.todoList.splice(index, 1);
+        removeTodo: function(todo){
+            this.todoList.splice(this.todoList.indexOf(todo), 1);
         },
         filteredTodos: function(type){
             return this.todoList.filter((todo)=>{

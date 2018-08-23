@@ -15,7 +15,7 @@
         <select v-model="todoItem.type">
             <option v-for="type in todoTypes">{{ type }}</option>
         </select>
-        
+        <p>Todo is equal to: {{ output }}</p> 
         <div class="lists">
             <list-group v-for="(type, index) in todoTypes" :type="type" :todo-list="todoList" :key="index">
                 <template slot-scope="group">
@@ -23,39 +23,11 @@
                                     :todo="todo" 
                                     :key="index"
                                     :type="group"
-                                    @remove-todo="removeTodo(index)">
+                                    @remove-todo="removeTodo($event)">
                     </todo-item>
                 </template>
             </list-group>
-            <!-- <div class="list">
-                <h2>{{ todoTypes[0] }}</h2>
-                <todo-item v-for="(todo, index) in todoList" 
-                    :todo="todo" 
-                    :key="index"
-                    @remove-todo="removeTodo($event)">
-                </todo-item>
-            </div>
-            <div class="list">
-                <h2>Work</h2>
-                <todo-item v-for="(todo, index) in todoList" 
-                    :todo="todo" 
-                    :key="index"
-                    @remove-todo="removeTodo($event)">
-                </todo-item>
-            </div>
-            <div class="list">
-                <h2>Dailies</h2>
-                <todo-item v-for="(todo, index) in dailiesList"
-                    :todo="todo" 
-                    :key="index"
-                    @remove-todo="removeTodo($event)">
-                </todo-item>
-            </div> -->
         </div>
-        <!-- <ul>
-            <li v-for="todo in todoList">{{ todo }}</li>
-        </ul> -->
-        <p>Todo is equal to: {{ output }}</p> 
     </div>
     <script src="scripts/app.js"></script>
 </body>
