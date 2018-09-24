@@ -41,6 +41,17 @@ let app = new Vue({
                 }
             })
         }
+    },
+    watch: {
+        todoList: {
+            handler() {
+                localStorage.setItem('todoList', JSON.stringify(this.todoList));
+            },
+            deep: true,
+        },
+    },
+    mounted() {
+        if (localStorage.getItem('todoList')) this.todoList = JSON.parse(localStorage.getItem('todoList'));
     }
 })
 
